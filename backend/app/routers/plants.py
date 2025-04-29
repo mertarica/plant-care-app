@@ -34,7 +34,7 @@ async def create_plant(plant: PlantCreate):
     return created_plant
 
 
-@router.put("/{plant_id}", response_model=PlantResponse)
+@router.patch("/{plant_id}", response_model=PlantResponse)
 async def update_plant(plant_id: str, plant_update: PlantUpdate):
     """Updates an existing plant"""
     updated_plant = await plant_service.update_plant(plant_id, plant_update)
