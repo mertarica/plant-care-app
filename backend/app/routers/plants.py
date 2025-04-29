@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException, Query, Body
 from typing import List, Optional
 from datetime import datetime
 
-from app.models.plant import PlantCreate, PlantUpdate, PlantResponse
-from app.models.health_record import HealthRecordResponse, HealthRecordCreate
+from app.schemas.plant import PlantCreate, PlantUpdate, PlantResponse
+from app.schemas.health_record import HealthRecordResponse, HealthRecordCreate
 from app.services import plant as plant_service
 from app.services import weather as weather_service
 from app.services import health_record as health_service

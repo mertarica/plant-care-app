@@ -1,5 +1,5 @@
 from app.database import health_records_collection
-from app.models.health_record import HealthRecordCreate, HealthRecordInDB
+from app.schemas.health_record import HealthRecordCreate, HealthRecordInDB
 from bson import ObjectId
 from datetime import datetime, timedelta
 from typing import List, Optional

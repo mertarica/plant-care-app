@@ -1,5 +1,5 @@
 from app.database import plants_collection
-from app.models.plant import PlantCreate, PlantUpdate
+from app.schemas.plant import PlantCreate, PlantUpdate
 from bson import ObjectId
 from datetime import datetime
 from typing import List, Optional
