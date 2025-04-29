@@ -2,7 +2,6 @@ from app.database import plants_collection
 from app.schemas.plant import PlantCreate, PlantUpdate
 from bson import ObjectId
 from datetime import datetime
-from typing import List, Optional
 
 
 async def get_all_plants():
@@ -52,3 +51,20 @@ async def delete_plant(plant_id: str):
 
     delete_result = await plants_collection.delete_one({"_id": ObjectId(plant_id)})
     return delete_result.deleted_count > 0
+
+
+async def search_plants(search_term: str = None):
+    query = {}
+
+    if search_term:
+        query["$or"] = [
+            {"name": {"$regex": search_term, "$options": "i"}},
+            {"type": {"$regex": search_term, "$options": "i"}},      # Type search
+            {"description": {"$regex": search_term, "$options": "i"}},
+            {"location.name": {"$regex": search_term, "$options": "i"}},
+        ]
+
+    cursor = plants_collection.find(query)
+
+    plants = await cursor.to_list(length=1000)
+    return plants

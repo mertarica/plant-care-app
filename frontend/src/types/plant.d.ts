@@ -14,12 +14,12 @@ interface Plant extends PlantBase {
   id: string;
   created_at?: string;
   updated_at?: string;
-  current_health?: number; // cached health score (0-100)
+  health_score?: number; // cached health score (0-100)
   last_checked?: string; // ISO timestamp
 }
 
 type PlantCreate = Omit<
   Plant,
-  "id" | "created_at" | "updated_at" | "current_health" | "last_checked"
+  "id" | "created_at" | "updated_at" | "health_score" | "last_checked"
 >;
 type PlantUpdate = Partial<PlantCreate>;

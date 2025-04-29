@@ -15,6 +15,14 @@ async def get_plants():
     return plants
 
 
+@router.get("/search", response_model=List[PlantResponse], response_model_by_alias=False)
+async def search_plants_endpoint(
+    q: str = Query(None, description="Search term"),
+):
+    plants = await plant_service.search_plants(search_term=q)
+    return plants
+
+
 @router.get("/{plant_id}", response_model=PlantResponse, response_model_by_alias=False)
 async def get_plant(plant_id: str):
     """Returns a plant by ID"""

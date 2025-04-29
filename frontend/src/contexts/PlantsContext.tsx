@@ -4,6 +4,7 @@ import {
   createPlant,
   updatePlant,
   deletePlant,
+  searchPlantsByText,
 } from "../api/plants";
 
 type PlantsState = {
@@ -70,6 +71,7 @@ const plantsReducer = (
 type PlantsContextType = {
   state: PlantsState;
   fetchPlants: () => Promise<void>;
+  searchPlants: (query: string) => Promise<void>;
   addPlant: (plant: PlantCreate) => Promise<void>;
   editPlant: (id: string, updates: PlantUpdate) => Promise<void>;
   removePlant: (id: string) => Promise<void>;
@@ -88,6 +90,18 @@ export const PlantsProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatch({ type: "FETCH_PLANTS_START" });
     try {
       const plants = await getPlants();
+      dispatch({ type: "FETCH_PLANTS_SUCCESS", payload: plants });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An unknown error occurred";
+      dispatch({ type: "FETCH_PLANTS_ERROR", payload: errorMessage });
+    }
+  };
+
+  const searchPlants = async (query: string) => {
+    dispatch({ type: "FETCH_PLANTS_START" });
+    try {
+      const plants = await searchPlantsByText(query);
       dispatch({ type: "FETCH_PLANTS_SUCCESS", payload: plants });
     } catch (error) {
       const errorMessage =
@@ -148,6 +162,7 @@ export const PlantsProvider: React.FC<{ children: React.ReactNode }> = ({
         removePlant,
         setModalOpen,
         setCurrentPlant,
+        searchPlants,
       }}
     >
       {children}

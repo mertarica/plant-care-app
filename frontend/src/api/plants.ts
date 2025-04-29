@@ -26,3 +26,10 @@ export const updatePlant = async (
 export const deletePlant = async (id: string): Promise<void> => {
   await apiClient.delete(`/plants/${id}`);
 };
+
+export const searchPlantsByText = async (query: string): Promise<Plant[]> => {
+  const response = await apiClient.get("/plants/search", {
+    params: { q: query },
+  });
+  return response.data;
+};
