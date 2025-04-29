@@ -1,15 +1,22 @@
 export const calculateHealthScore = (
-  expectedWater: number,
+  weeklyWaterNeed: number,
   expectedHumidity: number,
-  actualRain: number,
+  dailyRain: number,
   actualHumidity: number
 ): number => {
-  const waterScore =
-    1 - Math.min(1, Math.abs(expectedWater - actualRain) / expectedWater);
+  // Convert weekly water need to daily water need
+  const dailyWaterNeed = weeklyWaterNeed / 7;
+
+  // Calculate water score: how well daily rain meets daily water needs
+  // If rain exceeds needs, we consider it fully satisfied (capped at 100%)
+  const waterSatisfactionRate = Math.min(1, dailyRain / dailyWaterNeed);
+
+  // Calculate humidity score: how close actual humidity is to expected humidity
   const humidityScore =
     1 - Math.min(1, Math.abs(expectedHumidity - actualHumidity) / 100);
 
-  return Math.round((waterScore * 0.6 + humidityScore * 0.4) * 100);
+  // Weight water at 60% and humidity at 40%
+  return Math.round((waterSatisfactionRate * 0.6 + humidityScore * 0.4) * 100);
 };
 
 export const getHealthStatus = (healthScore: number): string => {
