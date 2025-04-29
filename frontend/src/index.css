@@ -1,5 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+
+  --breakpoint-3xl: 1920px;
+
+  --color-plant-green-50: oklch(0.98 0.02 142.7);
+  --color-plant-green-100: oklch(0.95 0.06 142.7);
+  --color-plant-green-200: oklch(0.91 0.12 142.7);
+  --color-plant-green-300: oklch(0.86 0.16 142.7);
+  --color-plant-green-400: oklch(0.78 0.18 142.7);
+  --color-plant-green-500: oklch(0.68 0.18 142.7);
+  --color-plant-green-600: oklch(0.53 0.16 142.7);
+  --color-plant-green-700: oklch(0.46 0.14 142.7);
+  --color-plant-green-800: oklch(0.38 0.12 142.7);
+  --color-plant-green-900: oklch(0.32 0.1 142.7);
+
+  --color-soil-brown-400: oklch(0.56 0.13 60.34);
+  --color-soil-brown-500: oklch(0.48 0.12 60.34);
+  --color-soil-brown-600: oklch(0.4 0.11 60.34);
+
+  --color-water-blue-400: oklch(0.65 0.15 230.36);
+  --color-water-blue-500: oklch(0.53 0.14 230.36);
+  --color-water-blue-600: oklch(0.41 0.13 230.36);
+
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, var(--font-display), Avenir, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,56 +43,28 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
+}
+
+/* Custom button styles */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg cursor-pointer shadow-sm transition-all duration-200 ease-fluid hover:pointer-events-auto;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .btn-primary {
+    @apply bg-plant-green-600 text-white hover:bg-plant-green-700;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+  }
+
+  .btn-outline {
+    @apply border border-plant-green-600 text-plant-green-600 hover:bg-plant-green-50;
   }
 }
