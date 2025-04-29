@@ -11,7 +11,7 @@ from app.services import health_record as health_service
 router = APIRouter(prefix="/plants", tags=["plants"])
 
 
-@router.get("/", response_model=List[PlantResponse])
+@router.get("/", response_model=List[PlantResponse], response_model_by_alias=False)
 async def get_plants():
     """Returns all plants"""
     plants = await plant_service.get_all_plants()
