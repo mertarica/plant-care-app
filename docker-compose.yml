@@ -5,6 +5,8 @@ services:
     restart: always
     ports:
       - "27017:27017"
+    env_file:
+      - ./backend/.env.docker
     environment:
       MONGO_INITDB_DATABASE: plant_care_db
     volumes:

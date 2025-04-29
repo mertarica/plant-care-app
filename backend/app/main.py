@@ -8,7 +8,7 @@ app = FastAPI(
     version="0.1.0"
 )
 
-# CORS ayarları
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Rotaları ekle
+# Routes
 app.include_router(plants.router)
 
 
