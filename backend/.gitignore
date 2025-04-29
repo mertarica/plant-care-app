@@ -1,0 +1,17 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / Packaging
+
+# Env Variables
+.env
+
+# IDE Files
+.vscode/
