@@ -1,37 +1,26 @@
-version: '3.8'
+# Build stage
+FROM node:18-alpine as build
 
-services:
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    environment:
-      - VITE_API_URL=http://backend:8000 
+WORKDIR /app
 
-  backend:
-    build: ./backend
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./backend:/app
-    environment:
-      - DATABASE_URL=postgresql://dbuser:dbpass@db:5432/plantdb
-    depends_on:
-      - db
+# Copy package files and install dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
 
-  db:
-    image: postgres:15
-    environment:
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=dbpass
-      - POSTGRES_DB=plantdb
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+# Copy all files
+COPY . .
 
-volumes:
-  postgres_data: 
+# Build the application
+RUN npm run build
+
+# Production stage
+FROM nginx:alpine
+
+# Copy built assets from the build stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
