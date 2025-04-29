@@ -3,7 +3,6 @@ from typing import List, Optional
 from datetime import datetime
 
 from app.schemas.plant import PlantCreate, PlantUpdate, PlantResponse
-from app.schemas.health_record import HealthRecordResponse, HealthRecordCreate
 from app.services import plant as plant_service
 
 router = APIRouter(prefix="/plants", tags=["plants"])

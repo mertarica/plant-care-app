@@ -12,4 +12,3 @@ database = client[DATABASE_NAME]
 
 # Collection referansları
 plants_collection = database.plants
-health_records_collection = database.health_records
