@@ -3,7 +3,7 @@ import { fetchWeatherApi } from "openmeteo";
 interface WeatherRequestParams {
   latitude: number;
   longitude: number;
-  days?: number; // Optional: How many days of data to retrieve
+  days?: number; 
 }
 
 export const fetchWeatherData = async ({

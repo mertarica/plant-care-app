@@ -23,13 +23,11 @@ export function usePlantTypes() {
     []
   );
 
-  // Get a human-readable label for a plant type
   const getPlantTypeLabel = (type: PlantType): string => {
     const option = plantTypeOptions.find((opt) => opt.value === type);
     return option?.label || "Unknown";
   };
 
-  // Get an appropriate icon for a plant type
   const getPlantIcon = (type: PlantType): string => {
     switch (type) {
       case PlantType.SUCCULENT:

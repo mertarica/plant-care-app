@@ -18,7 +18,6 @@ const PlantSearch = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Proper debounce implementation
   const debouncedSearch = useCallback(
     (value: string) => {
       if (timerRef.current) {
